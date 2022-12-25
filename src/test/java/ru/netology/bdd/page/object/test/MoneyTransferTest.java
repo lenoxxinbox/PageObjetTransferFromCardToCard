@@ -106,8 +106,6 @@ class MoneyTransferTest {
         new TransferPage()
                 .transfer(DataHelper.getTransferFirstCardWithKopecks());
 
-        System.out.println(Double.parseDouble(DataHelper.getTransferFirstCardWithKopecks().getAmount()));
-
         Assertions.assertEquals((primaryAmountFirstCard - Double.parseDouble(DataHelper.getTransferFirstCardWithKopecks().getAmount())), new DashboardPage().getFirstCardBalance());
         Assertions.assertEquals((primaryAmountSecondCard + Double.parseDouble(DataHelper.getTransferFirstCardWithKopecks().getAmount())), new DashboardPage().getSecondCardBalance());
     }
