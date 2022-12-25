@@ -33,7 +33,6 @@ public class TransferPage {
 
     public TransferPage aboveBalance(DataHelper.TransferCard transferCard, int primaryAmount) {
         amountField.setValue(String.valueOf(primaryAmount * 2));
-        System.out.println(primaryAmount * 2);
         fromCardField.setValue(transferCard.getFromCardNumber());
         transferButton.click();
         return new TransferPage();
