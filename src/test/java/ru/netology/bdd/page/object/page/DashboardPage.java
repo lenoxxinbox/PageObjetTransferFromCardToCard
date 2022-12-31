@@ -2,7 +2,7 @@ package ru.netology.bdd.page.object.page;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.val;
-import ru.netology.web.data.DataHelper;
+import ru.netology.bdd.page.object.data.DataHelper;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
