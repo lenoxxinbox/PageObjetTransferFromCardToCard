@@ -1,10 +1,10 @@
 package ru.netology.bdd.page.object.page;
-
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.val;
+import ru.netology.web.data.DataHelper;
 
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -14,31 +14,13 @@ public class DashboardPage {
     private final String balanceStart = "баланс: ";
     private final String balanceFinish = " р.";
 
-    private final String selectorFirstCard = "[data-test-id='92df3f1c-a033-48e6-8390-206f6b1f56c0'] button";
-    private final String selectorSecondCard = "[data-test-id='0f3f5c2a-249e-4c3d-8287-09f7a039391d'] button";
-
     public DashboardPage() {
         heading.shouldBe(visible);
     }
 
-    public TransferPage transferToFirstCard() {
-        $(selectorFirstCard).click();
-        return new TransferPage();
-    }
-
-    public TransferPage transferToSecondCard() {
-        $(selectorSecondCard).click();
-        return new TransferPage();
-    }
-
-    public int getFirstCardBalance() {
-        val text = cards.first().text();
-        return extractBalance(text);
-    }
-
-    public int getSecondCardBalance() {
-        val text = cards.last().text();
-        return extractBalance(text);
+    public int getCardBalance(DataHelper.CardInfo cardInfo) {
+        var textCard = cards.findBy(text(cardInfo.getCardNumber().substring(15))).getText();
+        return extractBalance(textCard);
     }
 
     private int extractBalance(String text) {
@@ -46,5 +28,10 @@ public class DashboardPage {
         val finish = text.indexOf(balanceFinish);
         val value = text.substring(start + balanceStart.length(), finish);
         return Integer.parseInt(value);
+    }
+
+    public TransferPage selectCardToTransfer(DataHelper.CardInfo cardInfo) {
+        cards.findBy(attribute("data-test-id", cardInfo.getTestId())).$("button").click();
+        return new TransferPage();
     }
 }
