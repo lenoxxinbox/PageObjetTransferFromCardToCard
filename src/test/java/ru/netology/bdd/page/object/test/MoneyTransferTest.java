@@ -64,7 +64,7 @@ class MoneyTransferTest {
         var verificationPage = loginPage.validLogin(authInfo);
         var dashboardPage = verificationPage.validVerify(DataHelper.getVerificationCode(authInfo));
         var transferPage = dashboardPage.selectCardToTransfer(getFirstCardInfo());
-        transferPage = transferPage.emptyForm();
+        transferPage.emptyForm();
 
         transferPage.findErrorMessage("Произошла ошибка");
 
@@ -82,7 +82,7 @@ class MoneyTransferTest {
         var expectedBalanceFirstCard = firstCardBalance;
         var expectedBalanceSecondCard = secondCardBalance;
         var transferPage = dashboardPage.selectCardToTransfer(getFirstCardInfo());
-        dashboardPage = transferPage.canselTransfer(String.valueOf(amount), getSecondCardInfo());
+        transferPage.canselTransfer(String.valueOf(amount), getSecondCardInfo());
 
         assertEquals(expectedBalanceFirstCard, dashboardPage.getCardBalance(getFirstCardInfo()));
         assertEquals(expectedBalanceSecondCard, dashboardPage.getCardBalance(getSecondCardInfo()));
@@ -98,7 +98,7 @@ class MoneyTransferTest {
         var secondCardBalance = dashboardPage.getCardBalance(getSecondCardInfo());
         var amount = generateInvalidAmount(secondCardBalance);
         var transferPage = dashboardPage.selectCardToTransfer(getFirstCardInfo());
-        transferPage = transferPage.makeInvalidTransfer(String.valueOf(amount), getSecondCardInfo());
+        dashboardPage = transferPage.makeValidTransfer(String.valueOf(amount), getSecondCardInfo());
 
         transferPage.findErrorMessage("Недостаточно средств на карте");
 
