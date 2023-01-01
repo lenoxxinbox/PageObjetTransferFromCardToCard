@@ -35,29 +35,13 @@ public class TransferPage {
         errorMessage.shouldHave(text(expectedText), Duration.ofSeconds(15)).shouldBe(visible);
     }
 
-    public DashboardPage canselTransfer(String amountToTransfer, DataHelper.CardInfo cardInfo) {
+    public void canselTransfer(String amountToTransfer, DataHelper.CardInfo cardInfo) {
         amountField.setValue(amountToTransfer);
         fromCardField.setValue(cardInfo.getCardNumber());
         transferCanselButton.click();
-        return new DashboardPage();
     }
 
-    public TransferPage emptyForm() {
+    public void emptyForm() {
         transferButton.click();
-        return new TransferPage();
-    }
-
-    public TransferPage makeInvalidTransfer(String amountToTransfer, DataHelper.CardInfo cardInfo) {
-        amountField.setValue(amountToTransfer);
-        fromCardField.setValue(cardInfo.getCardNumber());
-        transferButton.click();
-        return new TransferPage();
-    }
-
-    public TransferPage makeTransferWithKopecks(String amountToTransfer, DataHelper.CardInfo cardInfo) {
-        amountField.setValue(amountToTransfer);
-        fromCardField.setValue(cardInfo.getCardNumber());
-        transferButton.click();
-        return new TransferPage();
     }
 }
